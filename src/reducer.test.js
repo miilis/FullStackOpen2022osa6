@@ -18,18 +18,19 @@ describe('unicafe reducer', () => {
     expect(newState).toEqual(initialState)
   })
 
-  test('good is incremented', () => {
+  test.each([
+    ['good', { good: 1, ok: 0, bad: 0 }],
+    ['ok', { good: 0, ok: 1, bad: 0 }],
+    ['bad', { good: 0, ok: 0, bad: 1 }],
+    ['zero', { good: 0, ok: 0, bad: 0 }],
+  ])('%p is incremented', (actionType, expectedState) => {
     const action = {
-      type: 'GOOD'
+      type: actionType.toLocaleUpperCase()
     }
     const state = initialState
 
     deepFreeze(state)
     const newState = counterReducer(state, action)
-    expect(newState).toEqual({
-      good: 1,
-      ok: 0,
-      bad: 0
-    })
+    expect(newState).toEqual(expectedState)
   })
 })
