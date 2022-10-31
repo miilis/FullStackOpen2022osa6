@@ -23,6 +23,9 @@ const reducer = (state = initialState, action) => {
   console.log('state now: ', state)
   console.log('action', action)
   switch (action.type) {
+    case 'NEW':
+      const newAnecdote = asObject(action.data.content)
+      return [...state, newAnecdote]
     case 'VOTE':
       const changedId = action.data.id
       const anecdoteToChanged = state.find(anecdote => anecdote.id === changedId)
