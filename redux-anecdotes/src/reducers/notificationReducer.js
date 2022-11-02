@@ -7,10 +7,13 @@ const notificationSlice = createSlice({
   initialState,
   reducers: {
     setNotification(state, action) {
-      return `Created anecdote: ${action.payload}`
+      return action.payload
+    },
+    removeNotification(state, action) {
+      return ''
     }
   }
 })
 
-export const { setNotification } = notificationSlice.actions
+export const { setNotification, removeNotification } = notificationSlice.actions
 export default notificationSlice.reducer
