@@ -3,7 +3,12 @@ import { anecdoteVote } from '../reducers/anecdoteReducer'
 import { setNotification, removeNotification } from '../reducers/notificationReducer'
 
 const AnecdoteList = () => {
-  const anecdotesState = useSelector(state => state.anecdotes)
+  const anecdotesState = useSelector(state => {
+    if(state.filter === '') {
+      return state.anecdotes
+    }
+    return state.anecdotes.filter((dote) => dote.content.toLowerCase().includes(state.filter.toLowerCase()))
+  })
   const anecdotes = [...anecdotesState].sort((a, b) => b.votes - a.votes)
 
   const dispatch = useDispatch()
